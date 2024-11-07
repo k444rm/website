@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karm's Website</title>
+    <style>
+        /* Full-screen terminal style */
+        body {
+            background-color: #000000;
+            color: #ffffff; /* Set text color to white */
+            font-family: monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .output {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            width: 80%;
+            max-width: 800px;
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .input-area {
+            display: flex;
+            align-items: center;
+            width: 80%;
+            max-width: 800px;
+        }
+
+        .input-area span {
+            margin-right: 8px;
+        }
+
+        input {
+            background: transparent;
+            border: none;
+            color: #ffffff; /* Set input text color to white */
+            font-family: monospace;
+            font-size: 1em;
+            outline: none;
+            width: 100%;
+        }
+
+        a {
+            color: #ffffff; /* Set link color to white */
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- Terminal output and input -->
+    <div class="output" id="terminal-output">
+        <p>Type <b>help</b> for a list of all commands.</p>
+    </div>
+    <div class="input-area">
+        <span>&gt;</span>
+        <input type="text" id="command-input" placeholder="Enter command here..." autofocus>
+    </div>
+
+    <script>
+        // Handle commands
+        const output = document.getElementById('terminal-output');
+        const input = document.getElementById('command-input');
+
+        function printToTerminal(text) {
+            output.innerHTML += `<p>${text}</p>`;
+            output.scrollTop = output.scrollHeight;
+        }
+
+        function processCommand(command) {
+            command = command.toLowerCase();
+            if (command === "help") {
+                printToTerminal("Available commands:\n- visuals: View my visual artworks.\n- music: Explore my music.\n- links: View my contact and social media links.\n- shh");
+            } else if (command === "visuals") {
+                printToTerminal('Redirecting to the visuals section...');
+                window.location.href = "visuals.html";  // Redirect to visuals.html page
+            } else if (command === "music") {
+                printToTerminal('Loading music section...');
+                window.location.href = "music.html";  // Redirect to music page
+            } else if (command === "links") {
+                printToTerminal('Here are my contact and social media links:');
+                printToTerminal('Email: karm.patel132@gmail.com');
+                printToTerminal('Instagram: <a href="https://www.instagram.com/fr3shbandaid/?hl=en" target="_blank">@fr3shbandaid</a>');
+                printToTerminal('Behance: <a href="https://www.behance.net/gallery/210577773/Karms-Portfolio" target="_blank">Karms Portfolio</a>');
+            } else if (command === "shh") {
+                window.open("https://untitled.stream/library/track/PUpdpDJaz0mIKf0HMPy2Q", "_blank");  // Open in a new tab
+            } else {
+                printToTerminal(`Command not recognized: ${command}`);
+            }
+        }
+
+        input.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const command = input.value.trim();
+                printToTerminal(`> ${command}`);
+                processCommand(command);
+                input.value = '';  // Clear input
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Collection</title>
+    <style>
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .output {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            width: 80%;
+            max-width: 800px;
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .input-area {
+            display: flex;
+            align-items: center;
+            width: 80%;
+            max-width: 800px;
+        }
+
+        .input-area span {
+            margin-right: 8px;
+        }
+
+        input {
+            background: transparent;
+            border: none;
+            color: #ffffff;
+            font-family: monospace;
+            font-size: 1em;
+            outline: none;
+            width: 100%;
+        }
+
+        a {
+            color: #ffffff;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .music-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .music-page img {
+            max-width: 300px;
+            cursor: pointer;
+        }
+
+        .music-page a {
+            color: #ffffff;
+            font-size: 1.2em;
+            margin-top: 10px;
+            text-decoration: none;
+        }
+
+        .tracklist {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .tracklist a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.1em;
+            margin: 5px 0;
+        }
+
+        /* Container for album images */
+        .image-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .second-image {
+            display: none; /* Initially hidden */
+            margin-left: 20px;
+            max-width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Music Page Content -->
+    <div class="music-page">
+        <div class="image-container">
+            <a href="#" id="album-image-link">
+                <img src="images/Orange Precedence.png" alt="Orange Precedence" id="album-image">
+            </a>
+            <img src="images/Orange Precedence Tracklist.png" alt="Second Image" id="second-image" class="second-image"> <!-- Second image -->
+        </div>
+        <a href="https://open.spotify.com/album/2naRp6ZfiWaC1bsi823drg?fbclid=PAZXh0bgNhZW0CMTEAAaZidMoSc_GFqu7IbJf3U0NYsYKD6gz46MiNwFiq2NgB1qh0_qEKa5Jf8yg_aem_C3J1HL9AnXZ09E2Mt9gQbg" target="_blank">Orange Precedence</a>
+    </div>
+	
+
+    <!-- Tracklist (Initially Hidden) -->
+    <div id="tracklist" class="tracklist">
+        <h2>Tracklist:</h2>
+        <a href="https://open.spotify.com/track/21HQtvcyQL5pmrGuuDgqOD?si=04e0aa24beec4ece" target="_blank">Track 1: 2much!!</a>
+        <a href="https://open.spotify.com/track/3Ul1ColqFU4gLlJxMuepxr?si=43389ca95f59405b" target="_blank">Track 2: Madhuri Dixit Hitz</a>
+        <a href="https://open.spotify.com/track/0o5QOYmO6Izrbi9qLIRIh8?si=e0802f51448245a8" target="_blank">Track 3: Bachchan Agenda</a>
+        <a href="https://open.spotify.com/track/3WepAkZNOwlJGMqmJ8wKXb?si=fcd54edc03c44657" target="_blank">Track 4: Contigo (with U)</a>
+        <a href="https://open.spotify.com/track/0FJYNGGfoSOxw92BVsj3R6?si=13d0ec9e68cc4b8e" target="_blank">Track 5: Mr. Dream Merchant</a>
+        <a href="https://open.spotify.com/track/5IXDJoIArb23aYy8oVG5N0?si=3e6652bccaf543e8" target="_blank">Track 6: Goodnight (x2)</a>
+	<a href="https://open.spotify.com/track/1tE7wpmyKD7siIDRxsdNNL?si=bc57eb9f1f4f468c" target="_blank">Track 7: U and Ur Smile</a>
+	<a href="https://open.spotify.com/track/6t9Iy5y5hVJQnLVAL6hWQl?si=ececfad506af4ca8" target="_blank">Track 8: saturdAy</a>
+	<a href="https://open.spotify.com/track/49fjIOeRXlE1uW9L7u3acm?si=2f36e00ce5084d66" target="_blank">Track 9: Hii.</a>
+	<a href="https://open.spotify.com/track/4WNTAsioLOZ5PF1xepLLkF?si=23f4cc34bb8f48c8" target="_blank">Track 10: In Tune!</a>
+	<a href="https://open.spotify.com/track/2paiR8cC9avj8ZYsGLp89G?si=81cc77c3309843e0" target="_blank">Track 11: Sienna Sitcom</a>
+	<a href="https://open.spotify.com/track/7BgHIp8JBXgchKF7lW80uc?si=809e3aba538f4d66" target="_blank">Track 12: Viviendo</a>
+	<a href="https://open.spotify.com/track/0zChqmEtz1u8NkrB8w1Ibw?si=c6eb6f4c7d4f4503" target="_blank">Track 13: Let My Mind Run Underneath Warm Jets</a>
+    </div>
+    <br></br>
+    <div class="back-link">
+        <a href="index.html">Back to Terminal</a>
+    </div>
+    <script>
+        // Function to show the tracklist and second image when the album image is clicked
+        const albumImage = document.getElementById('album-image');
+        const tracklist = document.getElementById('tracklist');
+        const secondImage = document.getElementById('second-image');
+
+        albumImage.addEventListener('click', function() {
+            // Toggle tracklist visibility
+            tracklist.style.display = tracklist.style.display === 'none' ? 'flex' : 'none';
+            // Toggle second image visibility
+            secondImage.style.display = secondImage.style.display === 'none' ? 'block' : 'none';
+        });
+    </script>
+</body>
+</html>

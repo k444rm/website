@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Artworks</title>
+    <style>
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            width: 80%;
+            max-width: 1200px;
+            margin-top: 20px;
+        }
+
+        .gallery-item {
+            text-align: center;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            max-height: 250px;
+            object-fit: cover;
+        }
+
+        .gallery-item p {
+            margin-top: 10px;
+            font-size: 1.2em;
+        }
+
+        a {
+            color: #ffffff;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .back-link {
+            margin-top: 20px;
+        }
+
+        /* Fullscreen modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>Gallery</h1>
+    <div class="gallery" id="gallery">
+        <!-- Gallery items will be injected here by JavaScript -->
+    </div>
+
+    <div class="back-link">
+        <a href="index.html">Back to Terminal</a>
+    </div>
+
+    <!-- Fullscreen Modal -->
+    <div class="modal" id="image-modal">
+        <img class="modal-content" id="modal-image">
+    </div>
+
+    <script>
+        // Array of artwork image paths and descriptions
+        const artworks = [
+            { src: "images/Citrus.png", alt: "Citrus", title: "Citrus" },
+            { src: "images/Tears.png", alt: "Tears", title: "Tears" },
+            { src: "images/Young Nasir.png", alt: "Young Nasir", title: "Young Nasir" },
+            { src: "images/♡.png", alt: "♡", title: "♡" },
+            { src: "images/Farak.png", alt: "Farak", title: "Farak" },
+            { src: "images/IGOR.png", alt: "IGOR", title: "IGOR" },
+            { src: "images/At Long Last.jpg", alt: "At Long Last", title: "At Long Last" },
+            { src: "images/Faces.jpg", alt: "Faces", title: "Faces" }
+        ];
+
+        const gallery = document.getElementById('gallery');
+        const modal = document.getElementById('image-modal');
+        const modalImage = document.getElementById('modal-image');
+
+        let currentIndex = -1;
+
+        // Dynamically create gallery items
+        artworks.forEach((artwork, index) => {
+            const galleryItem = document.createElement('div');
+            galleryItem.classList.add('gallery-item');
+
+            const image = document.createElement('img');
+            image.src = artwork.src;
+            image.alt = artwork.alt;
+
+            const title = document.createElement('p');
+            title.textContent = artwork.title;
+
+            galleryItem.appendChild(image);
+            galleryItem.appendChild(title);
+
+            // Click event to open image in full screen
+            galleryItem.addEventListener('click', () => {
+                currentIndex = index;
+                modal.classList.add('active');
+                modalImage.src = artwork.src;
+            });
+
+            gallery.appendChild(galleryItem);
+        });
+
+        // Close modal on click outside the image
+        modal.addEventListener('click', () => {
+            modal.classList.remove('active');
+        });
+
+        // Function to navigate to the next image
+        function showNextImage() {
+            currentIndex = (currentIndex + 1) % artworks.length;
+            modalImage.src = artworks[currentIndex].src;
+        }
+
+        // Function to navigate to the previous image
+        function showPrevImage() {
+            currentIndex = (currentIndex - 1 + artworks.length) % artworks.length;
+            modalImage.src = artworks[currentIndex].src;
+        }
+
+        // Event listeners for arrow keys
+        document.addEventListener('keydown', (event) => {
+            if (modal.classList.contains('active')) {
+                if (event.key === 'ArrowRight') {
+                    showNextImage();
+                } else if (event.key === 'ArrowLeft') {
+                    showPrevImage();
+                }
+            }
+        });
+
+        // Swipe events for mobile (touch support)
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        modal.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        modal.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            if (touchStartX > touchEndX + 50) {
+                showNextImage();
+            } else if (touchStartX < touchEndX - 50) {
+                showPrevImage();
+            }
+        });
+
+    </script>
+
+</body>
+</html>
